@@ -52,3 +52,32 @@ function Creat(radius) {
 
 const creatAnother = new Creat(10);
 createCircle.draw();
+
+// getter and setter
+
+function Circle(radius) {
+  this.radius = radius;
+
+  let defaultLocation = { x: 0, y: 0 };
+
+  this.getDefaultLocation = function () {
+    return defaultLocation;
+  };
+  this.draw = function () {
+    console.log("Draw");
+  };
+
+  Object.defineProperty(this, "defaultLocation", {
+    get: function () {
+      return defaultLocation;
+    },
+    set: function (value) {
+      if (!value.x || !value.y) throw new Error("Invalid location.");
+
+      defaultLocation = value;
+    },
+  });
+}
+
+const circle = new Circle();
+circle.defaultLocation = 1;
